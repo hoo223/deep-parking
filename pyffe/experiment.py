@@ -248,6 +248,7 @@ class Experiment(object):
     def extract_features(self, dataset, snapshot_iter=None, blobname=None, force_extract=False):
         os.chdir(self.workdir)
         net, last_top, iters = self.model.to_extract_prototxt(dataset)
+        print(last_top)
 
         if blobname is None:
             blobname = last_top
@@ -432,7 +433,7 @@ class Experiment(object):
         dst = subprocess.PIPE if plot else open(os.devnull, 'wb')
 
         tee = subprocess.Popen(['tee', '-a', self.LOG_FILE], stdin=caffe.stderr, stdout=dst)
-
+        
         def handler(sig, frame):
             # propagate SIGINT down, and wait
             os.kill(caffe.pid, signal.SIGHUP)
@@ -474,16 +475,24 @@ class Experiment(object):
         max_iter = str(max([int(p.findall(sn)[0]) for sn in glob.glob(self.SNAPSHOTS_DIR + '/*.caffemodel')]))
 
         for t in self.test:
+            print(t)
             logging.info('Testing on ' + t.get_name() + ' ...')
             test_file = 'test-' + t.get_name() + '.prototxt'
+            #print(test_file)
 
             with open(self.workdir + '/' + test_file, 'w') as f:
                 net, iters = self.model.to_test_prototxt(t)
                 f.write(str(net))
 
             # TODO python data layer with async blob preparation
-            caffe_cmd = 'caffe test -gpu 0 -model {} -weights snapshots/snapshot_iter_{}.caffemodel -iterations {} 2> test-{}.caffelog'
+            caffe_cmd = 'caffe test -model {} -weights snapshots/snapshot_iter_{}.caffemodel -iterations {} 2> test-{}.caffelog'
+        
             os.system(caffe_cmd.format(test_file, max_iter, iters, t.get_name()))
+            print(caffe_cmd)
+            print("test_file: ", test_file)
+            print("max_iter: ", max_iter)
+            print("iters: ", iters)
+            print("test.name: ", t.get_name())
 
     # FIXME the recovered snapshot differs.. I think we can blame caffe or the RNG
     #    def recover_snapshot(self, snapshot_iter):
