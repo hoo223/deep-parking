@@ -172,6 +172,37 @@ class Experiment(object):
         pred = np.round(scores)[:, 1]
         acc = np.sum(labels == pred) / float(count)
         return acc
+    
+    def my_test(self, it, v):
+        lmdb_name = self.extract_features(v, it)
+        scores = self.get_features(lmdb_name)
+        labels = v.get_labels()
+        count = v.get_count()
+        pred = np.round(scores)[:, 1]
+        success = []
+        low_confidence = []
+        failed = []
+        
+        for i in range(count):
+            if labels[i] == pred[i]:
+                if labels[i] == 0: # label : 0
+                    if scores[i][0] >= 0.9: 
+                        success.append(i+1)
+                    else:
+                        low_confidence.append(i+1)
+                else: # label : 1
+                    if scores[i][0] <= 0.1: 
+                        success.append(i+1)
+                    else:
+                        low_confidence.append(i+1)
+            else:
+                failed.append(i+1)
+            print(i+1, scores[i][0])
+                
+        print("success", success)
+        print("low_confidence", low_confidence)
+        print("failed", failed)
+        
 
     # TODO: refactor in get_all_val_argmax or something similar..
     def get_argmax_iters(self):
