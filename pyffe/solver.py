@@ -58,7 +58,7 @@ class Solver(object):
         self.__dict__['sp'] = caffe.proto.caffe_pb2.SolverParameter()
 
         self.sp.solver_type = 0  # SGD
-        self.sp.solver_mode = 1  # GPU
+        self.sp.solver_mode = 0  # CPU / GPU = 1
 
         # critical:
         self.sp.base_lr = 0.01

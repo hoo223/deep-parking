@@ -273,7 +273,7 @@ class Experiment(object):
             shutil.rmtree(lmdb_name)
 
         os.system(
-            '/opt/caffe/build/tools/extract_features snapshots/snapshot_iter_{}.caffemodel {} {} {} {} lmdb GPU 0'.format(snapshot_iter,
+            '/opt/caffe/build/tools/extract_features snapshots/snapshot_iter_{}.caffemodel {} {} {} {} lmdb'.format(snapshot_iter,
                                                                                                                           extract_file,
                                                                                                                           blobname,
                                                                                                                           lmdb_name,
@@ -421,7 +421,7 @@ class Experiment(object):
         if os.path.exists(self.LOG_FILE) and not resume:
             os.remove(self.LOG_FILE)
 
-        cmd = ['/opt/caffe/build/tools/caffe', 'train', '-gpu', '0', '-solver', 'solver.prototxt']
+        cmd = ['/opt/caffe/build/tools/caffe', 'train', '-solver', 'solver.prototxt']
 
         if resume:
             cmd += ['-snapshot', '{}/snapshot_iter_{}.solverstate'.format(self.SNAPSHOTS_DIR, last_sn)]
