@@ -1,0 +1,4 @@
+dji_0003_002/Occupied/DJI_0003_002_car1.jpg 1
+dji_0003_002/Occupied/DJI_0003_002_car2.jpg 1
+dji_0003_002/Occupied/DJI_0003_002_car3.jpg 1
+dji_0003_002/Occupied/DJI_0003_002_car4.jpg 1

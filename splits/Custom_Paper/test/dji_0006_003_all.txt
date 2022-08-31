@@ -1,0 +1,6 @@
+dji_0006_003/Empty/DJI_0006_003_empty1.jpg 0
+dji_0006_003/Empty/DJI_0006_003_empty2.jpg 0
+dji_0006_003/Occupied/DJI_0006_003_car1.jpg 1
+dji_0006_003/Occupied/DJI_0006_003_car2.jpg 1
+dji_0006_003/Occupied/DJI_0006_003_car3.jpg 1
+dji_0006_003/Occupied/DJI_0006_003_car4.jpg 1

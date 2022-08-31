@@ -1,0 +1,3 @@
+dji_0003_002/Empty/DJI_0003_002_empty1.jpg 0
+dji_0003_002/Empty/DJI_0003_002_empty2.jpg 0
+dji_0003_002/Empty/DJI_0003_002_empty3.jpg 0
